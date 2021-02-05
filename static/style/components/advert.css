@@ -1,0 +1,36 @@
+.ad-div {
+  /* margin-top: 0.5rem; */
+}
+.ad-div div {
+  border-radius: 0.3rem;
+  margin-bottom: 0.2rem;
+  overflow: hidden;
+}
+
+.box-info {
+  color: rgba(0, 0, 0, 0.65);
+  font-size: 14px;
+  font-variant: tabular-nums;
+  line-height: 1.5;
+  list-style: none;
+  font-feature-settings: "tnum";
+  position: relative;
+  background: #fff;
+  border-radius: 2px;
+  transition: all 0.3s;
+}
+
+.blog-title {
+  font-weight: bold;
+  text-align: left;
+}
+
+.box {
+  text-align: center;
+}
+
+
+.day-text {
+  text-indent: 2em;
+  margin-top: 10px;
+}
