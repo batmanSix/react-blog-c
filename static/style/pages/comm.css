@@ -30,7 +30,12 @@ body{
 }
 .list-context{
   color:#777;
+  width:100%;
   padding:.5rem;
+  overflow:hidden;
+  white-space:no-wrap;
+  -webkit-line-clamp: 2;
+  text-overfow:ellipsis;
 }
 .list-icon{
   padding:.5rem 0;

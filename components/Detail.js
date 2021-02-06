@@ -26,7 +26,7 @@ return (
 
            <div>
               <div className="detailed-title">
-              React实战视频教程-技术胖Blog开发(更新08集)
+              React实战视频教程-开发(更新08集)
               </div>
 
               <div className="list-icon center">
@@ -36,7 +36,7 @@ return (
               </div>
 
               <div className="detailed-content" >
-                详细内容，下节课编写
+                markdown细内容，下节课编写
               </div>
 
            </div>

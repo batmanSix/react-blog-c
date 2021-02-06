@@ -1,20 +1,15 @@
-import React, { useState } from 'react'
-import Axios from 'axios';
+import React, { useState, useEffect } from 'react'
 import Head from 'next/head'
 import { Row, Col, List, Icon, Breadcrumb, BackTop, Carousel, Affix } from 'antd'
 import Header from '../components/Header'
 import Author from '../components/Author'
 import Advert from '../components/Advert'
 import Footer from '../components/Footer'
-import DayText from '../components/DayText'
-import '../static/style/pages/list.css'
-import Link from "next/link"
 import servicePath from '../config/api'
-import marked from 'marked'
-import hljs from "highlight.js";
-import 'highlight.js/styles/monokai-sublime.css';
-import '../static/style/pages/index.css'
-const Home = (list) => {
+import axios from "axios"
+import Link from 'next/link'
+
+const MyList = (list) => {
 
   const [top] = useState(50);
 
@@ -38,25 +33,11 @@ const Home = (list) => {
     background: '#364d79',
   };
 
-  const renderer = new marked.Renderer();
-  marked.setOptions({
-    renderer: renderer,
-    gfm: true,
-    pedantic: false,
-    sanitize: false,
-    tables: true,
-    breaks: false,
-    smartLists: true,
-    smartypants: false,
-    sanitize: false,
-    xhtml: false,
-    highlight: function (code) {
-      return hljs.highlightAuto(code).value;
-    }
+  const [ mylist , setMylist ] = useState(list.data);
 
-  });
-
-  const [mylist, setMylist] = useState(list.data);
+  useEffect(() => {
+    setMylist(list.data)
+  })
   return (
     <>
       <Head>
@@ -98,13 +79,11 @@ const Home = (list) => {
                     </Link>
                   </div>
                   <div className="list-icon">
-                    <span><Icon type="calendar" /> {item.addTime}</span>
+                    <span><Icon type="calendar" />{item.addTime}</span>
                     <span><Icon type="folder" /> {item.typeName}</span>
-                    <span><Icon type="fire" /> {item.view_count}人</span>
+                    <span><Icon type="fire" />  {item.view_count}人</span>
                   </div>
-                  <div className="list-context"
-                    dangerouslySetInnerHTML={{ __html: marked(item.introduce) }}
-                  />
+                  <div className="list-context">{item.introduce}</div>
                 </List.Item>
               )}
             />
@@ -113,34 +92,31 @@ const Home = (list) => {
         </Col>
 
         <Affix offsetTop={top}>
-              <Col className="comm-right" xs={0} sm={0} md={7} lg={5} xl={4}>
-                <DayText />
-                <Author />
-                <Advert />
-              </Col>
-            </Affix>
+          <Col className="comm-right" xs={0} sm={0} md={7} lg={5} xl={4}>
+            <Author />
+            <Advert />
+          </Col>
+        </Affix>
       </Row>
-          <BackTop className="goback" visibilityHeight="100">
-            <div style={style}>UP</div>
-          </BackTop>
-          <Footer />
+      <BackTop className="goback" visibilityHeight="100">
+        <div style={style}>UP</div>
+      </BackTop>
+      <Footer />
 
     </>
   )
 
 }
 
-// 获取文章list
-Home.getInitialProps = async ()=>{
+// 获取文章list 
+MyList.getInitialProps = async (context)=>{
+  let id =context.query.id
   const promise = new Promise((resolve)=>{
-          Axios(servicePath.getArticleList).then(
-            (res) => {
-              resolve(res.data)
-            }
-          )
-        })
-
+    axios(servicePath.getListById+id).then(
+      (res)=>resolve(res.data)
+    )
+  })
   return await promise
 }
 
-export default Home
+export default MyList

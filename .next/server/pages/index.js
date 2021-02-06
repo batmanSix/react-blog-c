@@ -260,6 +260,13 @@ function assign(target, ...searchParamsList) {
 
 /***/ }),
 
+/***/ "4Q3z":
+/***/ (function(module, exports) {
+
+module.exports = require("next/router");
+
+/***/ }),
+
 /***/ "6D7l":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -411,6 +418,13 @@ const Footer = () => __jsx("div", {
 
 /***/ }),
 
+/***/ "9Oib":
+/***/ (function(module, exports) {
+
+module.exports = require("highlight.js");
+
+/***/ }),
+
 /***/ "B79A":
 /***/ (function(module, exports) {
 
@@ -429,6 +443,13 @@ module.exports = require("antd");
 /***/ (function(module, exports) {
 
 
+
+/***/ }),
+
+/***/ "HWFp":
+/***/ (function(module, exports) {
+
+module.exports = require("marked");
 
 /***/ }),
 
@@ -555,8 +576,30 @@ var pages_list = __webpack_require__("F6Y/");
 var next_link = __webpack_require__("YFqc");
 var link_default = /*#__PURE__*/__webpack_require__.n(next_link);
 
+// EXTERNAL MODULE: ./config/api.js
+var api = __webpack_require__("bv8N");
+
+// EXTERNAL MODULE: external "marked"
+var external_marked_ = __webpack_require__("HWFp");
+var external_marked_default = /*#__PURE__*/__webpack_require__.n(external_marked_);
+
+// EXTERNAL MODULE: external "highlight.js"
+var external_highlight_js_ = __webpack_require__("9Oib");
+var external_highlight_js_default = /*#__PURE__*/__webpack_require__.n(external_highlight_js_);
+
+// EXTERNAL MODULE: ./node_modules/highlight.js/styles/monokai-sublime.css
+var monokai_sublime = __webpack_require__("bi5S");
+
+// EXTERNAL MODULE: ./static/style/pages/index.css
+var pages = __webpack_require__("TWMC");
+
 // CONCATENATED MODULE: ./pages/index.js
 var pages_jsx = external_react_default.a.createElement;
+
+
+
+
+
 
 
 
@@ -590,6 +633,22 @@ const Home = list => {
     textAlign: 'center',
     background: '#364d79'
   };
+  const renderer = new external_marked_default.a.Renderer();
+  external_marked_default.a.setOptions({
+    renderer: renderer,
+    gfm: true,
+    pedantic: false,
+    sanitize: false,
+    tables: true,
+    breaks: false,
+    smartLists: true,
+    smartypants: false,
+    sanitize: false,
+    xhtml: false,
+    highlight: function (code) {
+      return external_highlight_js_default.a.highlightAuto(code).value;
+    }
+  });
   const {
     0: mylist,
     1: setMylist
@@ -620,7 +679,7 @@ const Home = list => {
     className: "bread-div"
   }, pages_jsx(external_antd_["Breadcrumb"], null, pages_jsx(external_antd_["Breadcrumb"].Item, null, pages_jsx("a", {
     href: "/"
-  }, "\u9996\u9875")), pages_jsx(external_antd_["Breadcrumb"].Item, null, "\u89C6\u9891\u5217\u8868"))), pages_jsx(external_antd_["List"], {
+  }, "\u9996\u9875")), pages_jsx(external_antd_["Breadcrumb"].Item, null, "\u6587\u7AE0\u5217\u8868"))), pages_jsx(external_antd_["List"], {
     itemLayout: "vertical",
     dataSource: mylist,
     renderItem: item => pages_jsx(external_antd_["List"].Item, null, pages_jsx("div", {
@@ -641,8 +700,11 @@ const Home = list => {
     }), " ", item.typeName), pages_jsx("span", null, pages_jsx(external_antd_["Icon"], {
       type: "fire"
     }), " ", item.view_count, "\u4EBA")), pages_jsx("div", {
-      className: "list-context"
-    }, item.article_content))
+      className: "list-context",
+      dangerouslySetInnerHTML: {
+        __html: external_marked_default()(item.introduce)
+      }
+    }))
   }))), pages_jsx(external_antd_["Affix"], {
     offsetTop: top
   }, pages_jsx(external_antd_["Col"], {
@@ -658,20 +720,19 @@ const Home = list => {
   }, pages_jsx("div", {
     style: style
   }, "UP")), pages_jsx(Footer["a" /* default */], null));
-};
+}; // 获取文章list
+
 
 Home.getInitialProps = async () => {
   const promise = new Promise(resolve => {
-    external_axios_default()('http://127.0.0.1:7001/default/getArticleList').then(res => {
-      console.log(res); //console.log('远程获取数据结果:',res.data.data)
-
+    external_axios_default()(api["a" /* default */].getArticleList).then(res => {
       resolve(res.data);
     });
   });
   return await promise;
 };
 
-/* harmony default export */ var pages = __webpack_exports__["default"] = (Home);
+/* harmony default export */ var pages_0 = __webpack_exports__["default"] = (Home);
 
 /***/ }),
 
@@ -679,6 +740,13 @@ Home.getInitialProps = async () => {
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
+
+
+/***/ }),
+
+/***/ "TWMC":
+/***/ (function(module, exports) {
+
 
 
 /***/ }),
@@ -913,56 +981,120 @@ const Author = () => {
 "use strict";
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__("cDcd");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _static_style_components_header_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__("p/nH");
-/* harmony import */ var _static_style_components_header_css__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_static_style_components_header_css__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var antd__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__("Exp3");
-/* harmony import */ var antd__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(antd__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var next_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__("4Q3z");
+/* harmony import */ var next_router__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(next_router__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var next_link__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__("YFqc");
+/* harmony import */ var next_link__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(next_link__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__("zr5I");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _config_api__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__("bv8N");
+/* harmony import */ var _static_style_components_header_css__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__("p/nH");
+/* harmony import */ var _static_style_components_header_css__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_static_style_components_header_css__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var antd__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__("Exp3");
+/* harmony import */ var antd__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(antd__WEBPACK_IMPORTED_MODULE_6__);
 var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
 
 
 
 
-const Header = () => __jsx("div", {
-  className: "antffix"
-}, __jsx("div", {
-  className: "header"
-}, __jsx(antd__WEBPACK_IMPORTED_MODULE_2__["Row"], {
-  type: "flex",
-  justify: "center"
-}, __jsx(antd__WEBPACK_IMPORTED_MODULE_2__["Col"], {
-  xs: 24,
-  sm: 24,
-  md: 10,
-  lg: 10,
-  xl: 10
-}, __jsx("span", {
-  className: "header-logo"
-}, "\u5C0F\u5EB7"), __jsx("span", {
-  className: "header-txt"
-}, "\u4E13\u6CE8\u5F00\u53D1\u4E00\u767E\u5E74")), __jsx(antd__WEBPACK_IMPORTED_MODULE_2__["Col"], {
-  className: "memu-div",
-  xs: 0,
-  sm: 0,
-  md: 14,
-  lg: 8,
-  xl: 6
-}, __jsx(antd__WEBPACK_IMPORTED_MODULE_2__["Menu"], {
-  mode: "horizontal"
-}, __jsx(antd__WEBPACK_IMPORTED_MODULE_2__["Menu"].Item, {
-  key: "home"
-}, __jsx(antd__WEBPACK_IMPORTED_MODULE_2__["Icon"], {
-  type: "home"
-}), "\u9996\u9875"), __jsx(antd__WEBPACK_IMPORTED_MODULE_2__["Menu"].Item, {
-  key: "video"
-}, __jsx(antd__WEBPACK_IMPORTED_MODULE_2__["Icon"], {
-  type: "youtube"
-}), "\u89C6\u9891"), __jsx(antd__WEBPACK_IMPORTED_MODULE_2__["Menu"].Item, {
-  key: "life"
-}, __jsx(antd__WEBPACK_IMPORTED_MODULE_2__["Icon"], {
-  type: "smile"
-}), "\u751F\u6D3B"))))));
+
+
+
+
+const Header = props => {
+  const {
+    0: navArray,
+    1: setNavArray
+  } = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])([]);
+  Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(() => {
+    const fetchData = async () => {
+      const result = await axios__WEBPACK_IMPORTED_MODULE_3___default()(_config_api__WEBPACK_IMPORTED_MODULE_4__[/* default */ "a"].getTypeInfo).then(res => {
+        setNavArray(res.data.data);
+        return res.data.data;
+      });
+      setNavArray(result);
+    };
+
+    fetchData();
+  }, []);
+  console.log(props); // 改变路由地址
+
+  const handleClick = e => {
+    if (e.key == 0) {
+      next_router__WEBPACK_IMPORTED_MODULE_1___default.a.push('/');
+    } else {
+      console.log(e.key);
+      next_router__WEBPACK_IMPORTED_MODULE_1___default.a.push('/list?id=' + e.key);
+    }
+  };
+
+  return __jsx("div", {
+    className: "antffix"
+  }, __jsx("div", {
+    className: "header"
+  }, __jsx(antd__WEBPACK_IMPORTED_MODULE_6__["Row"], {
+    type: "flex",
+    justify: "center"
+  }, __jsx(antd__WEBPACK_IMPORTED_MODULE_6__["Col"], {
+    xs: 24,
+    sm: 24,
+    md: 10,
+    lg: 10,
+    xl: 10
+  }, __jsx("span", {
+    className: "header-logo"
+  }, "\u795E\u6BD3\u900D\u9065 "), __jsx("span", {
+    className: "header-txt"
+  }, "\u4E00\u4E2A\u559C\u6B22\u5965\u8FEA\u7684\u7537\u4EBA")), __jsx(antd__WEBPACK_IMPORTED_MODULE_6__["Col"], {
+    className: "memu-div",
+    xs: 0,
+    sm: 0,
+    md: 14,
+    lg: 10,
+    xl: 7
+  }, __jsx(antd__WEBPACK_IMPORTED_MODULE_6__["Menu"], {
+    mode: "horizontal",
+    onClick: handleClick
+  }, __jsx(antd__WEBPACK_IMPORTED_MODULE_6__["Menu"].Item, {
+    key: "0"
+  }, __jsx(antd__WEBPACK_IMPORTED_MODULE_6__["Icon"], {
+    type: "home"
+  }), "\u535A\u5BA2\u9996\u9875"), navArray.map(item => {
+    return __jsx(antd__WEBPACK_IMPORTED_MODULE_6__["Menu"].Item, {
+      key: item.id
+    }, __jsx(antd__WEBPACK_IMPORTED_MODULE_6__["Icon"], {
+      type: item.icon
+    }), item.typeName);
+  }))))));
+};
 
 /* harmony default export */ __webpack_exports__["a"] = (Header);
+
+/***/ }),
+
+/***/ "bi5S":
+/***/ (function(module, exports) {
+
+
+
+/***/ }),
+
+/***/ "bv8N":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+let ipUrl = 'http://127.0.0.1:7001/default/';
+let servicePath = {
+  getArticleList: ipUrl + 'getArticleList',
+  //  首页文章列表接口
+  getArticleById: ipUrl + 'getArticleById/',
+  // 文章详细页内容接口 ,需要接收参数
+  getTypeInfo: ipUrl + 'getTypeInfo',
+  // 文章分类信息
+  getListById: ipUrl + 'getListById/' // 根据类别ID获得文章列表 
+
+};
+/* harmony default export */ __webpack_exports__["a"] = (servicePath);
 
 /***/ }),
 
